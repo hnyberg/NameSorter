@@ -18,10 +18,11 @@ To further sort or filter the lists, use the following flags/arguments when runn
 
 **name=**	  filter out a specific name
 
+**file=**	  chose to read data from another file (include full name, i.e. "test.json")
 
 Examples:
 
-java -jar NameSorter-0.1.0.jar name=Ida
+java -jar NameSorter-0.1.0.jar name=Ida file=test.json
 
 java -jar NameSorter-0.1.0.jar -e -a
 
