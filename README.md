@@ -12,9 +12,9 @@ To further sort or filter the lists, use the following flags/arguments when runn
 
 **-a**	    sort names by reverse alphabetical order  
 
-**-e**	    filter out names with even frequency/occurance  
+**-e**	    filter out names with even frequency/occurrence  
 
-**-o**	    filter out names with odd frequency/occurance  
+**-o**	    filter out names with odd frequency/occurrence  
 
 **name=**	  filter out a specific name
 
