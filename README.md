@@ -8,15 +8,15 @@ The program will first scan through a "names.json" file in the "/src/main/resour
 
 To further sort or filter the lists, use the following flags/arguments when running the program:
 
--d	sort names by alphabetical order  
+**-d**	    sort names by alphabetical order  
 
--a	sort names by reverse alphabetical order  
+**-a**	    sort names by reverse alphabetical order  
 
--e	filter out names with even frequency/occurance  
+**-e**	    filter out names with even frequency/occurance  
 
--o	filter out names with odd frequency/occurance  
+**-o**	    filter out names with odd frequency/occurance  
 
-name=	filter out a specific name
+**name=**	  filter out a specific name
 
 
 Examples:
