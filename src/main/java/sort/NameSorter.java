@@ -26,8 +26,28 @@ public class NameSorter{
 
   private static final String FOLDER_STRUCTURE = "/src/main/resources/file/";
   private static final String FILENAME = "names.json";
+  private static Map<String, Integer> firstnames;
+  private static Map<String, Integer> surnames;
 
   public static void main(String[] args){
+
+    NameSorter namesorter = new NameSorter(args);
+
+    //  Print results
+    System.out.println();
+    System.out.println("FIRSTNAMES:");
+    for(String key: firstnames.keySet()){
+      System.out.println(key + " - " + firstnames.get(key));
+    }
+
+    System.out.println();
+    System.out.println("SURNAMES:");
+    for(String key: surnames.keySet()){
+      System.out.println(key + " - " + surnames.get(key));
+    }
+  }
+
+  public NameSorter(String[] args){
 
     //  Read arguments
     boolean sortedByLetter = false;
@@ -36,41 +56,41 @@ public class NameSorter{
     boolean filteredByOddFrequency = false;
     boolean filteredByName = false;
     String nameToFilter = "";
+    String filename = FILENAME;
 
     for (String arg : args){
+      if (arg.contains("file=") && arg.length() >= 4){
+        filename = arg.substring(5, arg.length());
+      }
       if (arg.equals("-a")){
         sortedByLetter = true;
         filteredInAscendingOrder = true;
-        System.out.println("Sorting by letter, ascending");
       }
       if (arg.equals("-d")){
         sortedByLetter = true;
         filteredInAscendingOrder = false;
-        System.out.println("Sorting by letter, descending");
       }
       if (arg.equals("-e")){
         filteredByEvenFrequency = true;
-        System.out.println("Filtering by frequency, even");
       }
       if (arg.equals("-o")){
         filteredByOddFrequency = true;
-        System.out.println("Filtering by frequency, odd");
       }
       if (arg.contains("name=") && arg.length() >= 4){
         filteredByName = true;
         nameToFilter = arg.substring(5, arg.length());
         nameToFilter = nameToFilter.substring(0, 1).toUpperCase() + nameToFilter.substring(1);
-        System.out.println("Filtering by name, " + nameToFilter);
       }
     }
 
     //  Locate file to read data from
-    String fileURL = System.getProperty("user.dir") + FOLDER_STRUCTURE + FILENAME;
-    System.out.println("Reading file from " + fileURL);
+    String fileURL = System.getProperty("user.dir") + FOLDER_STRUCTURE + filename;
+    //System.out.println("Reading file from " + fileURL);
     JSONObject currentPerson;
     String firstname, surname, gender;
-    Map<String, Integer> firstnames = new HashMap<String, Integer>();
-    Map<String, Integer> surnames = new HashMap<String, Integer>();
+
+    firstnames = new HashMap<String, Integer>();
+    surnames = new HashMap<String, Integer>();
 
     //  Save file data to managable maps/lists
     try {
@@ -129,18 +149,6 @@ public class NameSorter{
       surnames = getNamesSortedByFrequency(surnames);
     }
 
-    //  Print results
-    System.out.println();
-    System.out.println("Printing firstnames ");
-    for(String key: firstnames.keySet()){
-      System.out.println(key + " - " + firstnames.get(key));
-    }
-
-    System.out.println();
-    System.out.println("Printing surnames ");
-    for(String key: surnames.keySet()){
-      System.out.println(key + " - " + surnames.get(key));
-    }
   }
 
   private static HashMap getNamesSortedByFrequency(Map<String, Integer> map){
@@ -203,4 +211,11 @@ public class NameSorter{
     return newMap;
   }
 
+  public Map<String, Integer> getFirstnames(){
+    return firstnames;
+  }
+
+  public Map<String, Integer> getSurnames(){
+    return surnames;
+  }
 }
